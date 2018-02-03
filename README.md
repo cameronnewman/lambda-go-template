@@ -4,6 +4,15 @@
 
 Barebones Lambda Go template for interacting with APIGatewayProxy requests.
 
+[![GoDoc][1]][2]
+[![GoCard][3]][4]
+
+[1]: https://godoc.org/github.com/cameronnewman/lambda-go-template?status.svg
+[2]: https://godoc.org/github.com/cameronnewman/lambda-go-template
+[3]: https://goreportcard.com/badge/github.com/cameronnewman/lambda-go-template
+[4]: https://goreportcard.com/report/github.com/cameronnewman/lambda-go-template
+
+
 ## Usage ##
 
 ```
