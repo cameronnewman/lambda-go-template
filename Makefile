@@ -19,7 +19,7 @@ BUILD_IMAGE			:= $(shell echo "${PROJECT}-build")
 package: build
 	@echo "Packing for Lambda"
 	zip $(PROJECT).zip $(BINARY)
-	rm $(BINARY)
+	rm -rf $(BINARY)
 
 .PHONY: build
 build: tests
