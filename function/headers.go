@@ -180,7 +180,8 @@ const (
 	//allowedCORSHeaders is a http header variable name
 	allowedCORSHeaders = "X-Requested-With,X-Prototype-Version,Authorization,Content-Type,Cache-Control,Pragma,Origin,Accept,Cookie"
 
-	// Security
+	// Security related
+
 	//HeaderStrictTransportSecurity is a http header variable name
 	HeaderStrictTransportSecurity = "Strict-Transport-Security"
 
