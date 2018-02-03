@@ -1,0 +1,3 @@
+FROM golang:1.9
+
+WORKDIR $PWD/$BINARY
