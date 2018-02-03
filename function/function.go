@@ -8,12 +8,15 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
+//Function struct
 type Function struct{}
 
+//New creates a new function struct
 func New() *Function {
 	return &Function{}
 }
 
+//Run executes the function on the Lambda request
 func (f *Function) Run(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestID)
