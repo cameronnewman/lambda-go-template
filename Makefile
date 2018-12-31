@@ -12,14 +12,14 @@ PWD					:= $(shell pwd)
 .PHONY: tests
 tests:
 	@echo "Running tests in a container"
-	docker run --rm -t -v $(PWD):/opt -w /opt $(BUILD_IMAGE) go test -cover -v $(go list ./... | grep -v /example/)
+	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go test -cover -v $(go list ./... | grep -v /example/ | grep /internal/)
 	@echo "Completed tests"
 
 .PHONY: build
 build: tests
 	@echo "Building in a container"
 
-	docker run --rm -t -v $(PWD):/opt -w /opt $(BUILD_IMAGE) go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
+	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
 	@echo "Executable is available at the root of cloned repo"
 
 .PHONY: package
@@ -31,4 +31,4 @@ package: build
 .PHONY: run
 run: 
 	@echo "Starting the app"
-	docker run --rm -t -v $(PWD):/opt -w /opt $(BUILD_IMAGE) go run -ldflags "-X main.version=$(VERSION)" -v cmd/$(BINARY)/main.go --debug
+	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) go run -ldflags "-X main.version=$(VERSION)" -v cmd/$(BINARY)/main.go --debug
