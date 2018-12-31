@@ -11,27 +11,24 @@ PWD					:= $(shell pwd)
 
 .PHONY: tests
 tests:
-	@echo "Running Tests"
-	@echo "$(PWD)"
-
-	docker run -e GO111MODULE=on --rm -t -v $(PWD):/go/src -w /go/src $(BUILD_IMAGE) go test -cover -v $(go list ./... | grep -v /example/)
+	@echo "Running tests in a container"
+	docker run --rm -t -v $(PWD):/opt -w /opt $(BUILD_IMAGE) go test -cover -v $(go list ./... | grep -v /example/)
 	@echo "Completed tests"
 
 .PHONY: build
 build: tests
 	@echo "Building in a container"
 
-	docker run --rm -t -v $(PWD):/go/src -w /go/src $(BUILD_IMAGE) go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
+	docker run --rm -t -v $(PWD):/opt -w /opt $(BUILD_IMAGE) go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
 	@echo "Executable is available at the root of cloned repo"
 
 .PHONY: package
 package: build
-	@echo "Packing for Lambda"
+	@echo "Packing binary in zip file for Lambda deployment"
 	zip $(PROJECT).zip $(BINARY)
 	rm -rf $(BINARY)
 
 .PHONY: run
 run: 
 	@echo "Starting the app"
-	docker run --rm -t -v $(PWD):/go/src -w /go/src $(BUILD_IMAGE) go run -ldflags "-X main.version=$(VERSION)" -v cmd/$(BINARY)/main.go --debug
-
+	docker run --rm -t -v $(PWD):/opt -w /opt $(BUILD_IMAGE) go run -ldflags "-X main.version=$(VERSION)" -v cmd/$(BINARY)/main.go --debug

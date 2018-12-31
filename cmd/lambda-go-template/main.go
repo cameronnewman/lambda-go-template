@@ -3,9 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/cameronnewman/lambda-go-template/internal/function"
-
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/cameronnewman/lambda-go-template/internal/function"
 )
 
 var (
