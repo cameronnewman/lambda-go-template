@@ -14,14 +14,14 @@ PWD					:= $(shell pwd)
 .PHONY: test
 test:
 	@echo "Running tests in a container"
-	docker run -e GO111MODULE=on --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) go test -cover -v $(shell go list ./... | grep -v example | grep -v cmd) -count=1
+	docker run -e GO111MODULE=on --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) sh -c "go test -cover -v ./... -count=1"
 	@echo "Completed tests"
 
 .PHONY: build
 build: test
 	@echo "Building in a container"
 
-	docker run -e GO111MODULE=on --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
+	docker run -e GO111MODULE=on --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) sh -c "go build -x -ldflags '-X main.version=$(VERSION)' -o $(BINARY) cmd/$(BINARY)/main.go"
 	@echo "Executable is available at the root of cloned repo"
 
 .PHONY: package
