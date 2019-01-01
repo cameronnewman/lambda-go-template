@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/cameronnewman/lambda-go-template/internal/function"
+	"github.com/cameronnewman/lambda-go-template/internal/pkg/function"
 )
 
 var (
