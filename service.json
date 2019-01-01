@@ -3,8 +3,8 @@
       "name": "lambda-go-template",
       "description": "Simple lambda go template",
       "version": {
-        "major": "1",
-        "minor": "0"
+        "major": "0",
+        "minor": "8"
       }
     }
   }
