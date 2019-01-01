@@ -14,7 +14,7 @@ PWD					:= $(shell pwd)
 .PHONY: test
 test:
 	@echo "Running tests in a container"
-	docker run -e GO111MODULE=on --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) go test -cover -v $(go list ./... | grep -v /example/) -count=1
+	docker run -e GO111MODULE=on --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) go test -cover -v $(shell go list ./... | grep -v /example/) -count=1
 	@echo "Completed tests"
 
 .PHONY: build
