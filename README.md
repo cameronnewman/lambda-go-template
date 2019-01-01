@@ -21,12 +21,12 @@ Barebones Lambda Go template for interacting with APIGatewayProxy requests.
 ```
 make
 ```
-make will build, test and create a zip file that can be uploaded directly to AWS Lambda. All built using  Golang docker image.
+make will build, test and create a zip file that can be uploaded directly to AWS Lambda. All built docker image.
 
 ```
-make tests
+make test
 ```
-will run all tests in the repo excluding the vendor directory.
+will run all tests in the repo.
 
 
 ## Further Information ##
