@@ -21,7 +21,7 @@ tests:
 build: 
 	@echo "Building in a container"
 
-	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
+	docker run -e GO111MODULE=on --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
 	@echo "Executable is available at the root of cloned repo"
 
 .PHONY: package
