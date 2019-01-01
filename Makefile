@@ -9,17 +9,19 @@ VERSION				:= $(shell echo "${MAJOR_VERSION}_${MINOR_VERSION}_${INTERNAL_BUILD_I
 BUILD_IMAGE			:= $(shell echo "golang:1.11.4")
 PWD					:= $(shell pwd)
 
+.DEFAULT_GOAL := package
+
 .PHONY: tests
 tests:
 	@echo "Running tests in a container"
-	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go test -cover -v $(go list ./... | grep -v /example/ | grep /internal/)
+	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go list ./...; go test -cover -v $(go list ./... | grep -v /example/ | grep /internal/) -count=1
 	@echo "Completed tests"
 
 .PHONY: build
-build: tests
+build: 
 	@echo "Building in a container"
 
-	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
+	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go build -x -ldflags "-X main.version=$(VERSION)" -o $(BINARY) cmd/$(BINARY)/main.go
 	@echo "Executable is available at the root of cloned repo"
 
 .PHONY: package
@@ -31,4 +33,4 @@ package: build
 .PHONY: run
 run: 
 	@echo "Starting the app"
-	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) go run -ldflags "-X main.version=$(VERSION)" -v cmd/$(BINARY)/main.go --debug
+	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go run -ldflags "-X main.version=$(VERSION)" -v cmd/$(BINARY)/main.go --debug

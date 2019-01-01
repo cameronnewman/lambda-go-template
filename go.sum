@@ -1,5 +1,6 @@
 github.com/aws/aws-lambda-go v1.0.1 h1:zTaIkqVJzZIBXm0/3o/UCCWYVA4LeKo/fGBQVTVE2Ro=
 github.com/aws/aws-lambda-go v1.0.1/go.mod h1:zUsUQhAUjYzR8AuduJPCfhBuKWUaDbQiPOG+ouzmE1A=
+github.com/cameronnewman/lambda-go-template v0.0.0-20180203224916-c763b104f3a4 h1:4+dIGqUT3gg7YYq5dYASoZ0WnvPG27PmjwTatH/+/8Q=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
