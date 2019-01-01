@@ -36,6 +36,6 @@ github.com/cameronnewman/
   cmd/
     lambda-go-template/
       main.go
-  function/
+  internal/function/
     function.go <- Your function lives here
 ```
