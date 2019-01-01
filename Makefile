@@ -14,7 +14,7 @@ PWD					:= $(shell pwd)
 .PHONY: tests
 tests:
 	@echo "Running tests in a container"
-	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go list ./...; go test -cover -v $(go list ./... | grep -v /example/ | grep /internal/) -count=1
+	docker run --rm -t -v $(PWD):/usr/src/myapp -w /usr/src/myapp $(BUILD_IMAGE) printenv; go list ./...; go test -cover -v $(go list ./... | grep -v /example/) -count=1
 	@echo "Completed tests"
 
 .PHONY: build
@@ -27,7 +27,7 @@ build:
 .PHONY: package
 package: build
 	@echo "Packing binary in zip file for Lambda deployment"
-	zip $(PROJECT).zip $(BINARY)
+	zip $(BINARY).zip $(BINARY)
 	rm -rf $(BINARY)
 
 .PHONY: run
