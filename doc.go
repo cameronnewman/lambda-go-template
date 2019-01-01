@@ -1,5 +1,5 @@
 /*
-Package lambda is an Golang is a template repo for golang lambda apps
+Package lambda is a template repo for golang lambda apps
 */
 package lambda
 
